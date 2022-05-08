@@ -336,7 +336,7 @@ const CandyMachine = ({ walletAddress }) => {
     const itemsRedeemed = candyMachine.itemsRedeemed.toNumber();
     const itemsRemaining = itemsAvailable - itemsRedeemed;
     const goLiveData = candyMachine.data.goLiveDate.toNumber();
-    
+
     const presale =
       candyMachine.data.whitelistMintSettings &&
       candyMachine.data.whitelistMintSettings.presale &&
@@ -412,16 +412,21 @@ const CandyMachine = ({ walletAddress }) => {
         {renderDropTimer()}
         <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
         {/* Check to see if these properties are equal! */}
+
         {candyMachine.state.itemsRedeemed === candyMachine.state.itemsAvailable ? (
           <p className="sub-text">Sold Out 🙊</p>
         ) : (
-          <button
-            className="cta-button mint-button"
-            onClick={mintToken}
-          >
-            Mint NFT
-          </button>
+          Date() > candyMachine.state.goLiveDateTimeString ? (
+            <p className="sub-text">Wait for the drop! 🙊</p>
+          ) :
+            <button
+              className="cta-button mint-button"
+              onClick={mintToken}
+            >
+              Mint NFT
+            </button>
         )}
+
       </div>
     )
   );
