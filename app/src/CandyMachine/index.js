@@ -23,6 +23,8 @@ const opts = {
 const CandyMachine = ({ walletAddress }) => {
 
   const [candyMachine, setCandyMachine] = useState(null);
+  const date_filter = new Date();
+  const date_filter_timestamp = Math.floor(date_filter.getTime() * 0.001);
 
   const getCandyMachineCreator = async (candyMachine) => {
     const candyMachineID = new PublicKey(candyMachine);
@@ -406,16 +408,20 @@ const CandyMachine = ({ walletAddress }) => {
     return <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>;
   };
 
+
   return (
-    candyMachine && candyMachine.state && (
+    candyMachine && (
       <div className="machine-container">
         {renderDropTimer()}
         <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
         {/* Check to see if these properties are equal! */}
+        <p>{date_filter_timestamp}</p>
+        <p>{candyMachine.state.goLiveDateTimeString}</p>
+        <p>{candyMachine.state.goLiveData}</p>
         {candyMachine.state.itemsRedeemed === candyMachine.state.itemsAvailable ? (
           <p className="sub-text">Sold Out 🙊</p>
         ) : (
-          Date() < candyMachine.state.goLiveDateTimeString ? (
+          date_filter_timestamp < candyMachine.state.goLiveData ? (
             <p className="sub-text">Wait for the drop! 🙊</p>
           ) :
             <button
