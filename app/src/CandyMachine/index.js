@@ -415,9 +415,6 @@ const CandyMachine = ({ walletAddress }) => {
         {renderDropTimer()}
         <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
         {/* Check to see if these properties are equal! */}
-        <p>{date_filter_timestamp}</p>
-        <p>{candyMachine.state.goLiveDateTimeString}</p>
-        <p>{candyMachine.state.goLiveData}</p>
         {candyMachine.state.itemsRedeemed === candyMachine.state.itemsAvailable ? (
           <p className="sub-text">Sold Out 🙊</p>
         ) : (
